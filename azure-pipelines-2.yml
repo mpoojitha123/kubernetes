@@ -2,7 +2,7 @@
 - task: Kubernetes@1
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'kubeconfig-sa'
+    kubernetesServiceEndpoint: 'kubeconfig-sa27'
     command: 'apply'
     arguments: '-f Nodeport-service.yaml'
     secretType: 'dockerRegistry'
