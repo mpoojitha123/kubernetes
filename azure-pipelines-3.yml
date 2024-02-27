@@ -7,7 +7,7 @@ trigger:
 - main1
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: Default
 
 steps:
 - script: echo Hello, world!
@@ -16,7 +16,6 @@ steps:
   inputs:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: 'kubeconfig-sa27'
-    namespace: 'kube-system'
     command: 'apply'
     arguments: '-f Nodeport-service.yaml'
     secretType: 'dockerRegistry'
