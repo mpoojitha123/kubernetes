@@ -8,6 +8,9 @@ trigger: none
 pool:
   name: Default
 
+parameters:
+  - name: filename
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -16,7 +19,7 @@ steps:
     connectionType: 'Kubernetes Service Connection'
     kubernetesServiceEndpoint: 'kubeconfig-sa27'
     command: 'apply'
-    arguments: '-f Nodeport-service.yaml'
+    arguments: '-f {parameters.filename}'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
 
