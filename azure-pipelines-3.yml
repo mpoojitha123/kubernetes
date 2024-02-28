@@ -10,6 +10,7 @@ pool:
 
 parameters:
   - name: filename
+  - name: saname
 
 steps:
 - script: echo Hello, world!
@@ -17,7 +18,7 @@ steps:
 - task: Kubernetes@1
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'kubeconfig-sa27'
+    kubernetesServiceEndpoint: ${{parameters.saname}}
     command: 'apply'
     arguments: '-f ${{parameters.filename}}'
     secretType: 'dockerRegistry'
