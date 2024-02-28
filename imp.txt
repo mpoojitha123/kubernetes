@@ -1,0 +1,30 @@
+PAT: db2t47qmyrsgqieabk5k473dsvo64ugs3bpbk7pxkca7ycxfz7mq
+
+url: https://dev.azure.com/venkatasureshbabu28/
+
+1. create docker file
+2. create .sh file
+docker build --tag "azp-agent:linux" --file "./Dockerfile" .
+
+docker run -e AZP_URL="https://dev.azure.com/venkatasureshbabu28/" -e AZP_TOKEN="db2t47qmyrsgqieabk5k473dsvo64ugs3bpbk7pxkca7ycxfz7mq" -e AZP_POOL="Default" -e AZP_AGENT_NAME="Docker Agent - Linux" --name "azp-agent-linux" azp-agent:linux
+
+
+
+how to create service account:
+
+1. create cluster in kubernetes
+2. connect to open lens via google cloud sdk shell terminal
+3. create service account via open lens terminal
+   kubectl -n kube-system create serviceaccount kubeconfig-sa
+4. create cluster role binding
+   kubectl create clusterrolebinding <binding-name> --clusterrole=cluster-admin --serviceaccount=kube-system:<service-account-name>
+   eg: kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:kubeconfig-sa
+5. yaml file need token from service account for that create a .yaml file.
+   apiVersion: v1
+   kind: Secret
+   metadata:
+    name: sa-token
+    namespace: kube-system
+    annotations:
+      kubernetes.io/service-account.name: kubeconfig-sa
+   type: kubernetes.io/service-account-token
